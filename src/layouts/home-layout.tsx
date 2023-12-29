@@ -1,14 +1,18 @@
 // HomeLayout.js
 import { Outlet } from 'react-router-dom';
+import Header from '../components/common/header';
+import Footer from '../components/common/footer';
 
 const HomeLayout = () => {
   return (
     <div>
-        header
-      {/* Your layout structure here */}
-      <Outlet /> {/* Nested routes will render here */}
+        <Header></Header>
+<div className='container mx-auto'>
 
-      footer
+      <Outlet /> 
+</div>
+
+      <Footer></Footer>
     </div>
   );
 };
