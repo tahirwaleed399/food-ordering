@@ -1,7 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { cateogories, foods } from "../lib/constants";
 import { Cateogry } from "../lib/types";
-import classNames from "classnames";
 
 export default function Root() {
   return (

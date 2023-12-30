@@ -7,6 +7,8 @@ import HomeLayout from "./layouts/home-layout";
 import Root from "./routes/root";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import FoodItem from "./routes/food-item";
+import Cart from "./routes/cart";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
@@ -17,7 +19,9 @@ if (rootElement) {
         <Routes>
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<Root />} />
-            <Route path="about" element={<h1>About</h1>} />
+            <Route path="cart" element={<Cart />} />
+
+            <Route path="food-item/:id" element={<FoodItem />} />
           
           </Route>
         </Routes>
