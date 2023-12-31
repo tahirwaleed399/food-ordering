@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Food } from '../lib/types'
 import { Link } from 'react-router-dom'
 
