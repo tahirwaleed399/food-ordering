@@ -37,7 +37,7 @@ const Checkout = () => {
         <div className="bg-white rounded-xl shadow-sm">
           <div className="flex items-center gap-5 p-4 border-gray-200 border-b">
             <div>
-              <img src="/public/visa.png" alt="visa" />
+              <img src="/visa.png" alt="visa" />
             </div>
             <div className="flex-grow flex justify-between items-center">
               <span className="font-semibold text-base">Debit/Credit card</span>
@@ -55,7 +55,7 @@ const Checkout = () => {
           </div>
           <div className="flex items-center gap-5 p-4 border-gray-200 border-b">
             <div>
-              <img src="/public/paypal.png" alt="visa" />
+              <img src="/paypal.png" alt="visa" />
             </div>
             <div className="flex-grow flex justify-between items-center">
               <span className="font-semibold text-base">PayPal</span>
@@ -73,7 +73,7 @@ const Checkout = () => {
           </div>
           <div className="flex items-center gap-5 p-4 border-gray-200 ">
             <div>
-              <img src="/public/payoneer.png" alt="visa" />
+              <img src="/payoneer.png" alt="visa" />
             </div>
             <div className="flex-grow flex justify-between items-center">
               <span className="font-semibold text-base">Payoneer</span>
