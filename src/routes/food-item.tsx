@@ -1,10 +1,16 @@
 import React from "react";
+import { Link, useParams } from "react-router-dom";
+import { foodItems } from "../lib/constants";
 
 const FoodItem = () => {
+  const { id } = useParams();
+  const foodItem = foodItems.find((food)=> food.id === id);
   return (
     <div className="max-w-[850px]  mx-auto mt-6 mb-5">
       <div className="flex items-center justify-between ">
         <span>
+        <Link to="/">
+          {/* SVG Back Button */}
           <svg
             width="30"
             height="30"
@@ -21,6 +27,7 @@ const FoodItem = () => {
               stroke-linejoin="round"
             />
           </svg>
+        </Link>
         </span>
         <span>
           <svg
@@ -43,9 +50,9 @@ const FoodItem = () => {
       <div className="flex gap-2  w-max-content mt-7 items-center">
         <div className="w-1/2 self-start">
           <h1 className="font-semibold text-xl mt-4 ">
-            Grilled Beef Steak with Mushroom sauce
+           {foodItem?.title}
           </h1>
-          <span className=" text-sm text-gray-400">By Steak house</span>
+          <span className=" text-sm text-gray-400">By Waleed Tahir</span>
           <span className="flex gap-2 mt-3 items-center">
             <span>
               <svg
@@ -105,16 +112,15 @@ const FoodItem = () => {
           <div className="mt-6">
             <h3 className="font-semibold text-md">Description : </h3>
             <p className="text-gray-400 my-1 text-sm">
-              Indulge in the mouthwatering delight of a perfectly grilled beef
-              steak generously topped with a rich and savory mushroom sauce.
+              {foodItem?.description}
             </p>
           </div>
         </div>
         <div className="w-1/2 flex justify-center">
           <img
-            src="/public/fastfood.png"
+            src={foodItem?.url}
             alt="Iamge"
-            className="w-full h-full object-contain"
+            className="w-full h-full max-h-80 rounded-sm max-w-96 object-cover"
           />
         </div>
       </div>
@@ -123,14 +129,15 @@ const FoodItem = () => {
         <div className="flex flex-col mt-5">
           <span className="text-md text-gray-700 ">Price</span>
           <span className="flex gap-1 text-2xl ">
-            <span className="font-bold">25.27</span>
+            <span className="font-bold">{foodItem?.price}</span>
             <span className="text-primary">$</span>
           </span>
         </div>
         <div>
+        <Link to={'/cart'}>
         <button className="bg-primary text-white font-normal py-2 px-4 rounded-full">
   Add To Cart
-</button>
+</button></Link>
         </div>
       </div>
     </div>

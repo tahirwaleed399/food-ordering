@@ -1,33 +1,34 @@
 import Logo from './Logo';
 import {
   Bars3Icon,
-  BuildingOfficeIcon,
   HomeIcon,
-  PhoneIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/24/solid';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { selectItemsInCart } from '../features/cart/cartSlice';
+
 import {
   toggleMenu,
 } from '../../features/app/appSlice';
 import { useAppSelector } from '../../hooks/redux-hooks';
-// import LocationModal from './LocationModal';
-// import { selectAddress } from '../features/address/addressSlice';
+import { useAuthContext } from '../../providers/FirebaseProvider';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase/init';
+
 
 const Header = () => {
   const dispatch = useDispatch();
+  const {user } = useAuthContext();
   const { isMenuOpen } = useAppSelector((state) => state.app);
-  const isAuthenticated= false;
+  const isAuthenticated= user ? true : false;
 
+  
   const handleToggleMenu = () => dispatch(toggleMenu());
-
+const logout = () => {signOut(auth)}
 
   return (
     <header className='sticky w-full top-0 bg-white z-20 py-4 border-b shadow-sm border-gray-100'>
-      <div className='container flex justify-between items-center mx-auto'>
+      <div className='container flex justify-between items-center  mx-4 md:mx-auto'>
         <div className='flex items-center gap-2 md:gap-4'>
           <Logo />
 
@@ -46,24 +47,8 @@ const Header = () => {
               <p className='hidden md:block'>Home</p>
             </Link>
           </li>
-          <li>
-            <Link
-              to='/about'
-              className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-            >
-              <BuildingOfficeIcon className='w-4 h-4 text-gray-700' />{' '}
-              <p className='hidden md:block'>About</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to='/contact'
-              className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-            >
-              <PhoneIcon className='w-4 h-4 text-gray-700' />{' '}
-              <p className='hidden md:block'>Contact</p>
-            </Link>
-          </li>
+       
+          
           <li>
             <Link
               to='/cart'
@@ -74,7 +59,7 @@ const Header = () => {
               {
                 <p className='absolute -top-1 -right-1 bg-primary text-white flex justify-center items-center w-5 h-5 text-xs rounded-full'>
                   {/* {items.length} */}
-                  23
+                  2
                 </p>
               }
             </Link>
@@ -82,18 +67,19 @@ const Header = () => {
         </ul>
         { isAuthenticated ? (
           <button
-            onClick={()=>{}}
+            onClick={logout}
             className='ml-4 bg-primary text-white p-2 px-4 rounded-md items-center gap-2 hidden md:flex'
           >
-            Logout{' '}
+            Logout
           </button>
         ) : (
+          <Link to="/login">
           <button
-            onClick={() => {}}
-            className='ml-4 bg-primary text-white p-2 px-4 rounded-md items-center gap-2 hidden md:flex'
-          >
+           className='ml-4 bg-primary text-white p-2 px-4 rounded-md items-center gap-2 hidden md:flex'
+           >
             Login
           </button>
+            </Link>
         )}
 
         {!isMenuOpen ? (
@@ -109,24 +95,8 @@ const Header = () => {
                     <HomeIcon className='w-4 h-4 text-gray-700' /> <p>Home</p>
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to='/about'
-                    className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-                  >
-                    <BuildingOfficeIcon className='w-4 h-4 text-gray-700' />{' '}
-                    <p>About</p>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/contact'
-                    className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-                  >
-                    <PhoneIcon className='w-4 h-4 text-gray-700' />{' '}
-                    <p>Contact</p>
-                  </Link>
-                </li>
+               
+               
                 <li>
                   <Link
                     to='/cart'
@@ -145,18 +115,20 @@ const Header = () => {
               </ul>
               { isAuthenticated ? (
                 <button
-                  onClick={() => {}}
+                  onClick={logout}
                   className='ml-4 bg-primary text-white p-2 px-4 rounded-md items-center gap-2 hidden md:flex'
                 >
                   Logout{' '}
                 </button>
               ) : (
+                <Link to={'/login'}>
                 <button
                   onClick={() => {}}
                   className='ml-4 bg-primary text-white p-2 px-4 rounded-md items-center gap-2 hidden md:flex'
-                >
+                  >
                   Login
                 </button>
+                  </Link>
               )}
             </>
           </div>
@@ -173,24 +145,8 @@ const Header = () => {
                     <HomeIcon className='w-4 h-4 text-gray-700' /> <p>Home</p>
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to='/about'
-                    className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-                  >
-                    <BuildingOfficeIcon className='w-4 h-4 text-gray-700' />{' '}
-                    <p>About</p>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to='/contact'
-                    className='p-2 md:px-4 hover:bg-gray-50 rounded-md flex items-center gap-2'
-                  >
-                    <PhoneIcon className='w-4 h-4 text-gray-700' />{' '}
-                    <p>Contact</p>
-                  </Link>
-                </li>
+              
+                
                 <li>
                   <Link
                     to='/cart'

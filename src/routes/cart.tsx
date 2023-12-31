@@ -1,10 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { foodItems } from "../lib/constants";
+
+
+// Cart items
+const cart = [
+  { ...foodItems[0], quantity: 1 }, // 1 Steak
+  { ...foodItems[1], quantity: 2 }, // 2 Soups
+];
 
 const Cart = () => {
+  // Calculate total price
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
-    <div className="max-w-[850px]  mx-auto mt-6 mb-5">
-      <div className="flex items-center justify-between ">
-        <span>
+    <div className="max-w-[850px] mx-4 md:mx-auto mt-6 mb-5">
+      <div className="flex items-center justify-between">
+        <Link to="/">
+          {/* SVG Back Button */}
           <svg
             width="30"
             height="30"
@@ -21,112 +34,47 @@ const Cart = () => {
               stroke-linejoin="round"
             />
           </svg>
-        </span>
-        <span>
-          <h1 className="font-semibold text-xl ">My Cart</h1>
-        </span>
+        </Link>
+        <h1 className="font-semibold text-xl">My Cart</h1>
         <span></span>
       </div>
 
       <div className="items flex flex-col gap-8 py-10">
-        <div className="bg-white rounded-lg flex p-3 gap-8">
-          <div>
-            <img
-              src="https://uizard.io/static/c83d44255adb4319b74d4b6e0e046911/4693b/Quick-Bite-Mobile-Checkout.webp"
-              alt="image"
-              className="h-28 w-28 rounded-md"
-            />
-          </div>
-          <div className="flex-grow  flex flex-col justify-between h-28">
-            <h1 className="font-medium text-lg ">
-              Green salad with mashed potatots
-            </h1>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-500">Quantity 2</span>
-              <span className="flex gap-1">
-                <span className="text-primary">$</span>
-                <span className="font-medium text-md">24.44</span>
-              </span>
-            </div>
-          </div>
+        {cart.map((item, index) => (
+        <div key={index} className="bg-white rounded-lg flex p-3 gap-8">
+        <div>
+          <img
+            src={item.url}
+            alt={item.title}
+            className="h-28 w-28 rounded-md"
+          />
         </div>
-        <div className="bg-white rounded-lg flex p-3 gap-8">
-          <div>
-            <img
-              src="https://uizard.io/static/c83d44255adb4319b74d4b6e0e046911/4693b/Quick-Bite-Mobile-Checkout.webp"
-              alt="image"
-              className="h-28 w-28 rounded-md"
-            />
-          </div>
-          <div className="flex-grow  flex flex-col justify-between h-28">
-            <h1 className="font-medium text-lg ">
-              Green salad with mashed potatots
-            </h1>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-500">Quantity 2</span>
-              <span className="flex gap-1">
-                <span className="text-primary">$</span>
-                <span className="font-medium text-md">24.44</span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg flex p-3 gap-8">
-          <div>
-            <img
-              src="https://uizard.io/static/c83d44255adb4319b74d4b6e0e046911/4693b/Quick-Bite-Mobile-Checkout.webp"
-              alt="image"
-              className="h-28 w-28 rounded-md"
-            />
-          </div>
-          <div className="flex-grow  flex flex-col justify-between h-28">
-            <h1 className="font-medium text-lg ">
-              Green salad with mashed potatots
-            </h1>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-500">Quantity 2</span>
-              <span className="flex gap-1">
-                <span className="text-primary">$</span>
-                <span className="font-medium text-md">24.44</span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-lg flex p-3 gap-8">
-          <div>
-            <img
-              src="https://uizard.io/static/c83d44255adb4319b74d4b6e0e046911/4693b/Quick-Bite-Mobile-Checkout.webp"
-              alt="image"
-              className="h-28 w-28 rounded-md"
-            />
-          </div>
-          <div className="flex-grow  flex flex-col justify-between h-28">
-            <h1 className="font-medium text-lg ">
-              Green salad with mashed potatots
-            </h1>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-500">Quantity 2</span>
-              <span className="flex gap-1">
-                <span className="text-primary">$</span>
-                <span className="font-medium text-md">24.44</span>
-              </span>
-            </div>
+        <div className="flex-grow flex flex-col justify-between h-28">
+          <h1 className="font-medium text-lg">{item.title}</h1>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-500">Quantity {item.quantity}</span>
+            <span className="flex gap-1">
+              <span className="text-primary">$</span>
+              <span className="font-medium text-md">{item.price.toFixed(2)}</span>
+            </span>
           </div>
         </div>
       </div>
+        ))}
+      </div>
+
       <div className="flex justify-between items-center my-6">
         <div className="flex flex-col mt-5">
-          <span className="text-md text-gray-700 ">Total</span>
-          <span className="flex gap-1 text-2xl ">
-            <span className="font-bold">130</span>
+          <span className="text-md text-gray-700">Total</span>
+          <span className="flex gap-1 text-2xl">
+            <span className="font-bold">{totalPrice.toFixed(2)}</span>
             <span className="text-primary">$</span>
           </span>
         </div>
-        <div>
+        <Link to={'/checkout'}>
         <button className="bg-primary text-white font-normal py-2 px-4 rounded-full">
-  Checkout
-</button>
-        </div>
+          Checkout
+        </button></Link>
       </div>
     </div>
   );
